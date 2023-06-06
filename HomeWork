@@ -1,1 +1,87 @@
 
+import org.junit.Assert;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.concurrent.TimeUnit;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.sleep;
+
+
+public class HomeWorkTest {
+
+    @Test
+
+
+    public void shopping(){
+
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.saucedemo.com/");
+
+       /* WebElement login = driver.findElement(By.id("user-name"));  // ეს მეორე ვარიანტია,სადაც ცვლადებში ვინახავთ ელემენტებს და შემდეგ ვანიჭებთ მნიშვნელობებს
+        WebElement password = driver.findElement(By.id("password"));
+        WebElement enter = driver.findElement(By.id("login-button"));
+
+        login.sendKeys("standard_user");
+        password.sendKeys("secret_sauce");
+        enter.click();*/
+
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+//      driver.findElement(By.id("password")).sendKeys("secret_sauce",Keys.ENTER);
+        driver.findElement(By.xpath("//*[@id=\"login-button\"]")).click();
+
+
+
+        driver.findElement(By.name("add-to-cart-sauce-labs-backpack")).click();
+        driver.findElement(By.id("add-to-cart-test.allthethings()-t-shirt-(red)")).click();
+
+        String expectedTitle = "Sauce Labs Backpack";
+        String titleOfBag = driver.getTitle();
+        Assert.assertEquals(titleOfBag,expectedTitle);
+
+        String expectedTitleRed = "Test.allTheThings() T-Shirt (Red)";
+        Assert.assertEquals((driver.findElement(By.linkText("Test.allTheThings() T-Shirt (Red)"))),expectedTitleRed);
+        String titleOfShirt = driver.getTitle();
+
+
+
+    //    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    //    Thread.sleep(5000);  ეს იკითხე რატომ აწითლებს.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    sleep(5000);
+    driver.close();
+
+    }
+
+
+
+
+}
+
